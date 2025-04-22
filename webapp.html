@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood-Based Song Picker</title>
+</head>
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Song for Your Mood</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background: #f0f4f8;
+          text-align: center;
+          padding: 50px;
+        }
+        .container {
+          max-width: 500px;
+          margin: auto;
+          background: white;
+          padding: 30px;
+          border-radius: 12px;
+          box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        select, button {
+          padding: 10px;
+          margin-top: 20px;
+          font-size: 16px;
+          width: 100%;
+        }
+        #songSuggestion {
+          margin-top: 30px;
+          font-size: 18px;
+          color: #333;
+          opacity: 0;
+          transition: opacity 1s ease-in-out;
+        }
+        #songSuggestion.visible {
+          opacity: 1;
+        }
+        a {
+          text-decoration: none;
+          color: #1DB954;
+          font-weight: bold;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <h1>🎧 What Song Matches Your Mood?</h1>
+        <label for="mood">Select your mood:</label>
+        <select id="mood">
+          <option value="">--Choose a mood--</option>
+          <option value="happy">Happy</option>
+          <option value="sad">Sad</option>
+          <option value="angry">Angry</option>
+          <option value="relaxed">Relaxed</option>
+          <option value="romantic">Romantic</option>
+        </select>
+        <button onclick="suggestSong()">Get a Song</button>
+        <div id="songSuggestion"></div>
+      </div>
+    
+      <script>
+        function suggestSong() {
+          const mood = document.getElementById('mood').value;
+          const suggestion = document.getElementById('songSuggestion');
+    
+          const songs = {
+            happy: {
+              title: "'End of the Line' by The Traveling Wilburys",
+              link: "https://open.spotify.com/track/4HA2jo7wkMdN1lmLO6ryzE?si=d26b29b9609b46f8"
+            },
+            sad: {
+              title: "'Bigger Than the Whole Sky' by Taylor Swift",
+              link: "https://open.spotify.com/track/0BiqmkasE5FdrChwKfVp8X?si=1f9bd08c1ac94e76"
+            },
+            angry: {
+              title: "'Angry Again' by Megadeth",
+              link: "https://open.spotify.com/track/3CI1JP2ooMBSFjIy1u6Yrc?si=c61de2e196004b6b"
+            },
+            relaxed: {
+              title: "'Down by the Seaside' by Led Zeppelin",
+              link: "https://open.spotify.com/track/5NfzVueIjM2uwu7UWTvZAU?si=6e72b8a2979d468c"
+            },
+            romantic: {
+              title: "'The Only Exception' by Paramore",
+              link: "https://open.spotify.com/track/7JIuqL4ZqkpfGKQhYlrirs?si=914a72ee2ce8424e"
+            }
+          };
+    
+          // Reset suggestion
+          suggestion.classList.remove('visible');
+          suggestion.innerHTML = "";
+    
+          setTimeout(() => {
+            if (mood && songs[mood]) {
+              suggestion.innerHTML = `You should listen to: <a href="${songs[mood].link}" target="_blank">${songs[mood].title}</a>`;
+            } else {
+              suggestion.innerHTML = "Please select a mood to get a song!";
+            }
+            suggestion.classList.add('visible');
+          }, 100); // Delay to trigger transition
+        }
+      </script>
+    </body>
+    </html>
+    
